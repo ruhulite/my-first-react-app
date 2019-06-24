@@ -2,28 +2,31 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Header from './header';
+import Footer from './footer';
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import { linkList } from './pageLinks';
 
 function App() {
   return (
-    <div className="main">
-      <header className="site-header">
-        <Header />
-      </header>
-      {/*<header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>*/}
-    </div>
+    <Router>
+      <div className="main">
+        <header className="site-header">
+          <Header />
+        </header>
+        <div className="site-content">
+          {/*<Route path="/" exact component={HomeContent} />*/}
+          {linkList.map(({exact, path, component}, index) =>
+                <Route path={path} exact={exact} key={index} component={component} />
+            )}
+          {/*<Route path="/about/" component={AboutContent} />
+          <Route path="/service/" component={ServiceContent} />
+          <Route path="/service/" component={ServiceContent} />*/}
+        </div>
+        <footer className="site-footer">
+          <Footer />
+        </footer>
+      </div>    
+    </Router>
   );
 }
 
