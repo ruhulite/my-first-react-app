@@ -1,0 +1,24 @@
+.employee-information {
+	display: flex;
+	margin: 50px 0;
+	/*flex-direction: column;*/
+}
+.form-row {
+	display: flex;
+	width: 100%;
+	margin: 0 15px;
+}
+.form-row label {
+	margin: 7px 10px 0 0;
+}
+.form-row select {
+	width: 100%;
+	height: 42px;
+	padding: 0 15px;
+}
+.re-employee-information {
+	margin: 50px 15px 0;
+}
+.re-title-value {
+    margin: 7px 0 0 0;
+}
