@@ -1,4 +1,4 @@
-import HomeContent from './homeContent';
+import HomeContent from './home';
 import AboutContent from './about';
 import ServiceContent from './service';
 
