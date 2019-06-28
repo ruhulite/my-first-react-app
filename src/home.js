@@ -6,7 +6,7 @@ function linkClickhandler(e) {
 	alert('Link Clicked!');
 }
 
-const personInfo = [
+const personData = [
 					{age: 20, fname: 'Ruhul Amin', lname: 'Khan', department: 'IT', company: 'EchoTechSys'},
 					{age: 21, fname: 'Mohammad', lname: 'Hafeez', department: 'Graphics', company: 'EchoTechSys'},
 					{age: 22, fname: 'Mohammad', lname: 'Tuhin', department: 'IT', company: 'EchoTechSys'},
@@ -28,6 +28,7 @@ class HomeContent extends React.Component {
 	constructor (props) {
 		super(props);
 		this.state = {
+			personInfo: personData,		
 			isloggedIn: false, 
 			id: null, 
 			firstName: '',
@@ -37,7 +38,6 @@ class HomeContent extends React.Component {
 			company: '',
 		};
 		this.employeeInfoSubmitHandler = this.employeeInfoSubmitHandler.bind(this);
-		//this.fieldValueHandler = this.fieldValueHandler.bind(this);
 	}
 
 	buttonClickHandler = () => {
@@ -57,26 +57,38 @@ class HomeContent extends React.Component {
 		this.setState({id});
 	}
 
-	/*fieldValueHandler = (e) => {
-		this.setState({value: e.target.value});
-		console.log('Value: ' + e.target.value);
-	}*/
-
 	employeeInfoSubmitHandler = (event) => {
 		event.preventDefault();
-		const inputs = event.target.getElementByTagName('input');
+		const inputs = event.target.getElementsByTagName('input');		
+
+		const employeeInformationData = { 
+			age: event.target.age.value, 
+			fname: event.target.firstName.value,
+			lname: event.target.lastName.value, 
+			department: event.target.department.value, 
+			company: event.target.company.value
+		};
+
+		const personInfo = this.state.personInfo;
+
+		personInfo.push(employeeInformationData);
+
 		this.setState({
-			firstName: inputs.firstName.value,
-			lastName: inputs.lastName.value,
-			age: inputs.age.value,
-			department: inputs.department.value,
-			company: inputs.company.value,
+			firstName: '',
+			lastName: '',
+			age: '',
+			department: '',
+			company: '',
+			personInfo: personInfo,
+			id: personInfo.length - 1
 		});
-		//console.log('Form value: ' + e.state.value);
+
 	}
 
+	handleFieldValueChange = (event, fieldName) => this.setState({[fieldName]: event.target.value})
+
 	render() {
-		const {isloggedIn} = this.state;
+		const {isloggedIn, personInfo} = this.state;
 		const {age = '', department = '', company = ''} = personInfo[this.state.id] || {};
 		return(
 			<div>
@@ -94,7 +106,7 @@ class HomeContent extends React.Component {
 							<select onChange={this.employeeNameHandler}>
 								<option>Please select a name</option>
 								{personInfo.map(({fname, lname}, index) =>
-									<option value={index} data-index={index}>{fname ? fname : ''} {lname ? lname : ''}</option>
+									<option key={index} value={index} data-index={index}>{fname ? fname : ''} {lname ? lname : ''}</option>
 								)}
 							</select>
 						</div>
@@ -108,22 +120,23 @@ class HomeContent extends React.Component {
 							<label>Company: </label><span className="re-title-value">{company}</span>							
 						</div>
 					</div>
+					<h3 className="re-employee-information">Employee Information Form</h3>
 					<div className="employee-information-form">
 						<form onSubmit={this.employeeInfoSubmitHandler}>
 							<div className="form-row">
-								<label>First Name: </label><input type="text" placeholder="First Name" name="firstName" />
+								<label>First Name: </label><input required type="text" placeholder="First Name" name="firstName" onChange={(e) => this.handleFieldValueChange(e, 'firstName')} value={this.state.firstName}/>
 							</div>
 							<div className="form-row">
-								<label>Last Name: </label><input type="text" placeholder="Last Name" name="lastName" />
+								<label>Last Name: </label><input required type="text" placeholder="Last Name" name="lastName" onChange={(e) => this.handleFieldValueChange(e, 'lastName')} value={this.state.lastName}/>
 							</div>
 							<div className="form-row">
-								<label>Age: </label><input type="text" placeholder="Age" name="age"  />
+								<label>Age: </label><input required type="text" placeholder="Age" name="age"  onChange={(e) => this.handleFieldValueChange(e, 'age')} value={this.state.age}/>
 							</div>
 							<div className="form-row">
-								<label>Department: </label><input type="text" placeholder="Department" name="department" />
+								<label>Department: </label><input required type="text" placeholder="Department" name="department" onChange={(e) => this.handleFieldValueChange(e, 'department')} value={this.state.department}/>
 							</div>
 							<div className="form-row">
-								<label>Company: </label><input type="text" placeholder="Company" name="company" />
+								<label>Company: </label><input required type="text" placeholder="Company" name="company"onChange={(e) => this.handleFieldValueChange(e, 'company')} value={this.state.company} />
 							</div>
 							<div className="form-row">
 								<input type="submit" value="Submit" />

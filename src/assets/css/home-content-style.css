@@ -22,3 +22,28 @@
 .re-title-value {
     margin: 7px 0 0 0;
 }
+.employee-information-form {
+	display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+}
+.employee-information-form .form-row {
+	margin-bottom: 20px;
+}
+.employee-information-form label {
+	min-width: 120px;
+    margin-top: 5px;
+    text-align: right;
+}
+.employee-information-form input[type="text"] {
+	width: 25%;
+    height: 32px;
+    padding: 0px 15px;
+}
+.employee-information-form input[type="submit"] {
+	width: 200px;
+    height: 38px;
+    line-height: 38px;
+    margin-left: 313px;
+    margin-top: 20px;
+}
