@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
-import './App.css';
+import './assets/css/main.css';
+import './assets/css/main.css';
 import Header from './header';
 import Footer from './footer';
 import { BrowserRouter as Router, Route } from "react-router-dom";
@@ -14,13 +15,9 @@ function App() {
           <Header />
         </header>
         <div className="site-content">
-          {/*<Route path="/" exact component={HomeContent} />*/}
           {linkList.map(({exact, path, component}, index) =>
-                <Route path={path} exact={exact} key={index} component={component} />
-            )}
-          {/*<Route path="/about/" component={AboutContent} />
-          <Route path="/service/" component={ServiceContent} />
-          <Route path="/service/" component={ServiceContent} />*/}
+            <Route path={path} exact={exact} key={index} component={component} />
+          )}
         </div>
         <footer className="site-footer">
           <Footer />
@@ -29,5 +26,4 @@ function App() {
     </Router>
   );
 }
-
 export default App;

@@ -6,7 +6,7 @@ function linkClickhandler(e) {
 	alert('Link Clicked!');
 }
 
-const personInfo = [
+const personData = [
 					{age: 20, fname: 'Ruhul Amin', lname: 'Khan', department: 'IT', company: 'EchoTechSys'},
 					{age: 21, fname: 'Mohammad', lname: 'Hafeez', department: 'Graphics', company: 'EchoTechSys'},
 					{age: 22, fname: 'Mohammad', lname: 'Tuhin', department: 'IT', company: 'EchoTechSys'},
@@ -24,10 +24,30 @@ const personInfo = [
 					{age: 21, fname: 'Mathew', lname: 'Matt', department: 'IT', company: 'EchoTechSys'},
 				];
 
+const tabsData = [
+					{
+						title: 'First', 
+						tabData: 'Authoritatively empower future-proof vortals and interdependent materials. Continually enable scalable total linkage whereas open-source technologies. Phosfluorescently incubate compelling customer service rather than worldwide outsourcing. Distinctively synthesize equity invested scenarios vis-a-vis enterprise-wide web services. Assertively harness bleeding-edge total linkage after seamless partnerships. Continually customize unique total linkage vis-a-vis an expanded array of markets. Quickly e-enable cost effective synergy vis-a-vis fully tested best practices. Rapidiously target unique value before synergistic best practices. Progressively disseminate 24/7 synergy before interdependent web-readiness. Globally create economically sound portals through multidisciplinary total linkage. Quickly pursue high-quality quality vectors before impactful supply chains. Energistically administrate 24/7 e-commerce whereas value-added data. Globally recaptiualize vertical applications after viral sources. Holisticly envisioneer next-generation internal or "organic" sources and turnkey meta-services. Dramatically create premier e-markets via client-centered niches. Proactively target cooperative "outside the box" thinking after diverse platforms. Efficiently customize reliable systems and process-centric resources. Holisticly integrate web-enabled channels vis-a-vis out-of-the-box e-business. Interactively network superior manufactured products and robust ideas. Dramatically maximize sticky niches via one-to-one "outside the box" thinking. Authoritatively optimize worldwide catalysts for change through.',
+					},
+					{
+						title: 'Second', 
+						tabData: 'Compellingly maximize ubiquitous convergence vis-a-vis worldwide e-commerce. Professionally mesh standardized imperatives and multimedia based channels. Collaboratively visualize functional interfaces through 2.0 solutions. Professionally orchestrate interoperable results without clicks-and-mortar process improvements. Globally strategize holistic schemas vis-a-vis user friendly meta-services.',
+					},
+					{
+						title: 'Third', 
+						tabData: 'Dramatically evisculate progressive models before error-free resources. Distinctively benchmark client-centered growth strategies through orthogonal opportunities. Quickly iterate B2C customer service whereas turnkey sources. Monotonectally develop best-of-breed "outside the box" thinking through frictionless users. Authoritatively impact distinctive action items before ubiquitous outsourcing.',
+					},
+					{
+						title: 'Fourth', 
+						tabData: 'Conveniently embrace functional action items rather than premium leadership skills. Intrinsicly provide access to next-generation initiatives without high-quality value. Authoritatively synergize business architectures rather than timely process improvements. Conveniently expedite interactive e-markets for cross-unit applications. Intrinsicly cultivate proactive models after leading-edge results.',
+					},
+				];
+
 class HomeContent extends React.Component {
 	constructor (props) {
 		super(props);
 		this.state = {
+			personInfo: personData,		
 			isloggedIn: false, 
 			id: null, 
 			firstName: '',
@@ -35,9 +55,9 @@ class HomeContent extends React.Component {
 			age: '',
 			department: '',
 			company: '',
+			tabIndex: 0,
 		};
 		this.employeeInfoSubmitHandler = this.employeeInfoSubmitHandler.bind(this);
-		//this.fieldValueHandler = this.fieldValueHandler.bind(this);
 	}
 
 	buttonClickHandler = () => {
@@ -57,27 +77,44 @@ class HomeContent extends React.Component {
 		this.setState({id});
 	}
 
-	/*fieldValueHandler = (e) => {
-		this.setState({value: e.target.value});
-		console.log('Value: ' + e.target.value);
-	}*/
-
 	employeeInfoSubmitHandler = (event) => {
 		event.preventDefault();
-		const inputs = event.target.getElementByTagName('input');
+		const inputs = event.target.getElementsByTagName('input');		
+
+		const employeeInformationData = { 
+			age: event.target.age.value, 
+			fname: event.target.firstName.value,
+			lname: event.target.lastName.value, 
+			department: event.target.department.value, 
+			company: event.target.company.value
+		};
+
+		const personInfo = this.state.personInfo;
+
+		personInfo.push(employeeInformationData);
+
 		this.setState({
-			firstName: inputs.firstName.value,
-			lastName: inputs.lastName.value,
-			age: inputs.age.value,
-			department: inputs.department.value,
-			company: inputs.company.value,
+			firstName: '',
+			lastName: '',
+			age: '',
+			department: '',
+			company: '',
+			personInfo: personInfo,
+			id: personInfo.length - 1
 		});
-		//console.log('Form value: ' + e.state.value);
+
+	}
+
+	handleFieldValueChange = (event, fieldName) => this.setState({[fieldName]: event.target.value});
+
+	tabsClickHandler = (tabIndex) => {
+		this.setState({tabIndex});
 	}
 
 	render() {
-		const {isloggedIn} = this.state;
+		const {isloggedIn, personInfo, tabIndex} = this.state;
 		const {age = '', department = '', company = ''} = personInfo[this.state.id] || {};
+		const {tabData} = tabsData[tabIndex];
 		return(
 			<div>
 				<section className="home-main-content">					
@@ -94,7 +131,7 @@ class HomeContent extends React.Component {
 							<select onChange={this.employeeNameHandler}>
 								<option>Please select a name</option>
 								{personInfo.map(({fname, lname}, index) =>
-									<option value={index} data-index={index}>{fname ? fname : ''} {lname ? lname : ''}</option>
+									<option key={index} value={index} data-index={index}>{fname ? fname : ''} {lname ? lname : ''}</option>
 								)}
 							</select>
 						</div>
@@ -108,27 +145,41 @@ class HomeContent extends React.Component {
 							<label>Company: </label><span className="re-title-value">{company}</span>							
 						</div>
 					</div>
+					<h3 className="re-employee-information">Employee Information Form</h3>
 					<div className="employee-information-form">
 						<form onSubmit={this.employeeInfoSubmitHandler}>
 							<div className="form-row">
-								<label>First Name: </label><input type="text" placeholder="First Name" name="firstName" />
+								<label>First Name: </label><input required type="text" placeholder="First Name" name="firstName" onChange={(e) => this.handleFieldValueChange(e, 'firstName')} value={this.state.firstName}/>
 							</div>
 							<div className="form-row">
-								<label>Last Name: </label><input type="text" placeholder="Last Name" name="lastName" />
+								<label>Last Name: </label><input required type="text" placeholder="Last Name" name="lastName" onChange={(e) => this.handleFieldValueChange(e, 'lastName')} value={this.state.lastName}/>
 							</div>
 							<div className="form-row">
-								<label>Age: </label><input type="text" placeholder="Age" name="age"  />
+								<label>Age: </label><input required type="text" placeholder="Age" name="age"  onChange={(e) => this.handleFieldValueChange(e, 'age')} value={this.state.age}/>
 							</div>
 							<div className="form-row">
-								<label>Department: </label><input type="text" placeholder="Department" name="department" />
+								<label>Department: </label><input required type="text" placeholder="Department" name="department" onChange={(e) => this.handleFieldValueChange(e, 'department')} value={this.state.department}/>
 							</div>
 							<div className="form-row">
-								<label>Company: </label><input type="text" placeholder="Company" name="company" />
+								<label>Company: </label><input required type="text" placeholder="Company" name="company"onChange={(e) => this.handleFieldValueChange(e, 'company')} value={this.state.company} />
 							</div>
 							<div className="form-row">
 								<input type="submit" value="Submit" />
 							</div>
 						</form>
+					</div>
+					<h3 className="re-employee-information">About the Employee</h3>
+					<div className="employee-information-form">
+						<div className="employee-tabs-wrap">
+							<ul className="employee-tabs">
+								{tabsData.map(({title}, index) =>
+								<li className={tabIndex === index ? 'active' : ''} key={index} onClick={() => this.tabsClickHandler(index)}><span className="tab-title">{title}</span></li>
+								)}
+							</ul>
+						</div>
+						<div className="employee-tabs-body">
+							{tabData}
+						</div>
 					</div>
 				</section>
 			</div>

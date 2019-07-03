@@ -22,3 +22,68 @@
 .re-title-value {
     margin: 7px 0 0 0;
 }
+.employee-information-form {
+	display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+}
+.employee-information-form .form-row {
+	margin-bottom: 20px;
+}
+.employee-information-form label {
+	min-width: 120px;
+    margin-top: 5px;
+    text-align: right;
+}
+.employee-information-form input[type="text"] {
+	width: 25%;
+    height: 32px;
+    padding: 0px 15px;
+}
+.employee-information-form input[type="submit"] {
+	width: 200px;
+    height: 38px;
+    line-height: 38px;
+    margin-left: 0;
+    margin-top: 20px;
+}
+.employee-tabs-wrap {
+	display: flex;
+	padding: 0 15px;
+}
+.employee-tabs {
+	display: inline-flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    border-bottom: 1px solid #ccc;
+    width: 100%;
+}
+.employee-tabs li {
+	padding: 10px 20px;
+    cursor: pointer;
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    background: #fff;
+}
+.employee-tabs li:last-child {
+    border-right: 1px solid #ccc;
+}
+.employee-tabs li:hover,
+.employee-tabs li.active {
+	color: green;
+}
+.employee-tabs li.active {
+	margin-bottom: -1px;
+}
+.employee-tabs-body {
+	margin: 0 15px 30px;
+    padding: 15px 15px 21px;
+    border-bottom: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+}
