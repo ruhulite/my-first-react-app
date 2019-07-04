@@ -1,0 +1,65 @@
+.site-header-wrap {
+	display: flex;
+}
+.header-right,
+.header-left {
+	width: 35%;
+	display: flex;
+}
+.header-left h1 {
+	margin: 0;
+	padding: 0;
+}
+.header-right {
+	width: 65%;
+}
+.main-menu {
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+.main-menu > li {
+    list-style-type: none;
+    padding: 0 15px 10px;
+    position: relative;
+}
+.main-menu > li > a {
+    text-transform: capitalize;
+    text-decoration: none;
+}
+.main-menu li:hover > a {
+    color: green;
+}
+.submenu {
+	display: none;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	padding: 10px 0px;
+	border-radius: 5px;
+	width: 100%;
+	min-width: 200px;
+	box-shadow: 0px 0px 5px 1px #ccc;
+}
+.main-menu li:hover > .submenu {
+	display: block;
+}
+.submenu li {
+	list-style-type: none;
+	display: block;
+	position: relative;
+}
+.submenu li a {
+	display: block;
+	font-size: 13px;
+	line-height: 20px;
+	text-decoration: none;
+	padding: 10px 15px;
+}
+.submenu li a:hover {
+	color: green;
+}
+.submenu .submenu {
+    left: 100%;
+    top: 0;
+}
