@@ -56,6 +56,7 @@ class HomeContent extends React.Component {
 			department: '',
 			company: '',
 			tabIndex: 0,
+			accordionIndex: 0,
 		};
 		this.employeeInfoSubmitHandler = this.employeeInfoSubmitHandler.bind(this);
 	}
@@ -111,8 +112,12 @@ class HomeContent extends React.Component {
 		this.setState({tabIndex});
 	}
 
+	accordionClickHandler = (accordionIndex) => {
+		this.setState({accordionIndex});
+	}
+
 	render() {
-		const {isloggedIn, personInfo, tabIndex} = this.state;
+		const {isloggedIn, personInfo, tabIndex, accordionIndex} = this.state;
 		const {age = '', department = '', company = ''} = personInfo[this.state.id] || {};
 		const {tabData} = tabsData[tabIndex];
 		return(
@@ -168,7 +173,7 @@ class HomeContent extends React.Component {
 							</div>
 						</form>
 					</div>
-					<h3 className="re-employee-information">About the Employee</h3>
+					<h3 className="re-employee-information">About the Employee (Tab)</h3>
 					<div className="employee-information-form">
 						<div className="employee-tabs-wrap">
 							<ul className="employee-tabs">
@@ -179,6 +184,19 @@ class HomeContent extends React.Component {
 						</div>
 						<div className="employee-tabs-body">
 							{tabData}
+						</div>
+					</div>
+					<h3 className="re-employee-information">About the Employee (Accordion)</h3>
+					<div className="employee-information-form">
+						<div className="employee-accordion-wrap">
+							<ul className="employee-accordion">
+								{tabsData.map(({title, tabData}, index) =>
+								<li className={accordionIndex === index ? 'accordion-active accordion' : 'accordion'} key={index} onClick={() => this.accordionClickHandler(index)}>
+									<div className={accordionIndex === index ? 'active accordion-title' : "accordion-title"}>{title}</div>
+									<div className={accordionIndex === index ? 'active accordion-details' : "accordion-details"}>{tabData}</div>
+								</li>
+								)}
+							</ul>
 						</div>
 					</div>
 				</section>

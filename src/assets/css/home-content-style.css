@@ -67,6 +67,7 @@
     border-top-left-radius: 7px;
     border-top-right-radius: 7px;
     background: #fff;
+    font-weight: bold;
 }
 .employee-tabs li:last-child {
     border-right: 1px solid #ccc;
@@ -86,4 +87,46 @@
     border-left: 1px solid #ccc;
     border-bottom-left-radius: 7px;
     border-bottom-right-radius: 7px;
+}
+.employee-accordion {
+    padding: 0;
+    margin: 0 15px 50px;
+}
+.accordion {
+    list-style-type: none;
+}
+.accordion-title {
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-bottom: none;
+    padding: 12px 15px;
+    font-weight: bold;
+}
+.accordion-title:hover,
+.accordion-title.active {
+	color: green;
+}
+.accordion:last-child .accordion-title {
+    border-bottom: 1px solid #ccc;
+}
+.accordion:last-child .accordion-title.active {
+    border-bottom: none;
+}
+.accordion .accordion-details {
+    display: block;
+    border: 1px solid #ccc;
+    border-bottom: none;
+    padding: 20px 15px 30px;
+}
+.accordion .accordion-details {
+	display: none;
+}
+.accordion-active .accordion-details {
+	display: block;
+}
+.accordion:last-child .accordion-details {
+	border-bottom: none;
+}
+.accordion:last-child .accordion-details.active {
+	border-bottom: 1px solid #ccc;
 }

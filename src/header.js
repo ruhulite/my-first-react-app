@@ -13,7 +13,14 @@ class Header extends React.Component {
 					<nav>
 						<ul className="main-menu">
 							{linkList.map(({path, linkName}, index) =>
-							    <Link to={path} key = {index}> {linkName} </Link>
+							    <li>
+							    	<Link to={path} key = {index}> {linkName} </Link>
+							    	<ul className="submenu">
+										<li>
+											{/*<Link to={path} key = {index}> {linkName} </Link>*/}
+										</li>
+									</ul>
+							    </li>
 							)}
 						</ul>
 					</nav>
