@@ -65,8 +65,8 @@ export default {
 					],
 				},
 				{
-					"title": "about submenu", 
-					"path": "/about-submenu",
+					"title": "about submenu2", 
+					"path": "/about-submenu2",
 					"submenu": null,
 				},
 			],
@@ -162,8 +162,8 @@ export default {
 					],
 				},
 				{
-					"title": "service submenu", 
-					"path": "/service-submenu",
+					"title": "service submenu2", 
+					"path": "/service-submenu2",
 					"submenu": null,
 				},
 			],
