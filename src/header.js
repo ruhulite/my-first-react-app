@@ -1,10 +1,12 @@
 import React from 'react';
-import HeaderStyle from './assets/css/Header.css';
 import { Link } from "react-router-dom";
+
+import HeaderStyle from './assets/css/Header.css';
 import { linkList } from './pageLinks';
 import mainMenu from './linkLists';
 
 class Header extends React.Component {
+	
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -13,6 +15,8 @@ class Header extends React.Component {
 	}
 
 	renderSubMenu = (menuItem) => {
+
+		//console.log('menuItem '  + menuItem);
 
 		const options = menuItem.map( item => {
 
@@ -37,8 +41,6 @@ class Header extends React.Component {
 
 
 	render() {
-
-		//const {menuItem} = this.state;
 
 		return(
 			<div className="site-header-wrap">
